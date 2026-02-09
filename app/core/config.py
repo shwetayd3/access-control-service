@@ -8,6 +8,8 @@ class Settings(BaseSettings):
         "postgresql+asyncpg://postgres:postgres@localhost:5432/access_control"
     )
 
+    JWT_SECRET_KEY: str = "change-this-in-prod"
+
     class Config:
         env_file = ".env"
 
