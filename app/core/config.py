@@ -10,6 +10,8 @@ class Settings(BaseSettings):
 
     JWT_SECRET_KEY: str = "change-this-in-prod"
 
+    GOOGLE_CLIENT_ID: str
+
     class Config:
         env_file = ".env"
 
