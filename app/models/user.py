@@ -1,5 +1,6 @@
 from sqlalchemy import String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import relationship
 from app.models.base import Base
 
 class User(Base):
@@ -11,3 +12,4 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     is_oauth = mapped_column(Boolean, default=False)
+    roles = relationship("UserRole", back_populates="user")
