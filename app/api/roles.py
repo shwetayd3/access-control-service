@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from typing import List
 
 from app.core.database import get_db
 from app.models.role import Role
@@ -10,6 +11,12 @@ from app.schemas.role import RoleCreate, RoleResponse
 from app.auth.permissions import require_role
 
 router = APIRouter(prefix="/roles", tags=["Roles"])
+
+@router.get("/admin/dashboard")
+async def admin_dashboard(
+    current_user: User = Depends(require_role("admin"))
+):
+    return {"message": "Hello Admin"}
 
 @router.post("/", response_model=RoleResponse)
 async def create_role(
@@ -30,7 +37,7 @@ async def create_role(
 
     return role
 
-@router.get("/", response_model=list[RoleResponse])
+@router.get("/", response_model=List[RoleResponse])
 async def list_roles(
     db: AsyncSession = Depends(get_db),
     user=Depends(require_role("admin")),
