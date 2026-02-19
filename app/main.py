@@ -14,11 +14,17 @@ def create_app() -> FastAPI:
         version="0.1.0",
         debug=settings.DEBUG
     )
+    
 
     app.include_router(health_router, prefix="/health", tags=["health"])
-    app.include_router(auth_router)
+    app.include_router(auth_router, prefix="/auth", tags=["auth"])
+    app.include_router(roles_router, prefix="/roles", tags=["roles"])
     app.include_router(oauth_router)
-    app.include_router(roles_router)
+    #app.include_router(auth_router)
+    #app.include_router(roles_router)
+    for route in app.routes:
+      print(route.path)
+
     return app
 
 app = create_app()
