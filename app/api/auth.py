@@ -7,7 +7,9 @@ from app.models.user import User
 from app.auth.passwords import verify_password
 from app.auth.jwt import create_access_token
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+#router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter()
+
 
 @router.post("/login")
 async def login(email: str, password: str, db: AsyncSession = Depends(get_db)):
