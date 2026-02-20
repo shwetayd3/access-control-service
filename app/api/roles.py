@@ -10,7 +10,8 @@ from app.models.user_role import UserRole
 from app.schemas.role import RoleCreate, RoleResponse
 from app.auth.permissions import require_role
 
-router = APIRouter(prefix="/roles", tags=["Roles"])
+#router = APIRouter(prefix="/roles", tags=["Roles"])
+router = APIRouter()
 
 @router.get("/admin/dashboard")
 async def admin_dashboard(
